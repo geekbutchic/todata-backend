@@ -14,6 +14,10 @@ const isComplete = function (element) {
   return element.complete === true
 }
 
+const notComplete = function (element) {
+  return element.complete === false
+}
+
 const isHighPriority = function (element) {
   return element.priority > 1
 }
@@ -26,49 +30,71 @@ const namePlusPriority = function (element) {
   return element.text + ' - ' + newPriority
 }
 
+// or 
+// return element.text + ' - ' + (element.priority === 2 ? 'High' : 'Low');
+// PEMDAS - parentheses, exponents, multiplication, division, addition, subtraction
+// return `${element.text} - ${todo.priority === 2 ? 'High' : 'Low'}`;
+
 /***********************
  * ITERATION FUNCTIONS *
  ***********************/
 
-const names = function (arr) {
-  const newNames = [];
+// const names = function (arr) {
+//   const newNames = [];
 
-  for (const element of arr) {
-    newNames.push(getTodoName(element));
-  }
-  return newNames;
+//   for (const element of arr) {
+//     newNames.push(getTodoName(element));
+//   }
+//   return newNames;
+// }
+
+const names = function(element) {
+  return element.map(getTodoName)
 }
 
-const priorities = function (arr) {
-  const newPriorities = [];
+// const priorities = function (arr) {
+//   const newPriorities = [];
 
-  for (const element of arr) {
-    newPriorities.push(getPriority(element));
-  }
+//   for (const element of arr) {
+//     newPriorities.push(getPriority(element));
+//   }
 
-  return newPriorities;
+//   return newPriorities;
+// }
+
+const priorities = function(element) {
+  return element.map(getPriority)
 }
 
-const namesAndPriorities = function (arr) {
-  const newList = [];    
+// const namesAndPriorities = function (arr) {
+//   const newList = [];    
 
-  for (const element of arr) {
-    newList.push(namePlusPriority(element));
-  }
+//   for (const element of arr) {
+//     newList.push(namePlusPriority(element));
+//   }
 
-  return newList;
+//   return newList;
+// }
+
+const namesAndPriorities = function(element) {
+  return element.map(namePlusPriority)
 }
 
-const justComplete = function (arr) {
-  const notComplete = [];
+// const justComplete = function (arr) {
+//   const notComplete = [];
 
-  for (const element of arr) {
-    if (isComplete(element)) {
-      notComplete.push(element)
-    }
-  }
-  return notComplete;
-}
+//   for (const element of arr) {
+//     if (isComplete(element)) {
+//       notComplete.push(element)
+//     }
+//   }
+//   return notComplete;
+// }
+
+const justComplete = function(element) {
+  return element.filter(isComplete)
+} 
+
 
 const priority2Only = function (arr) {
   const highPriority = [];
@@ -80,6 +106,8 @@ const priority2Only = function (arr) {
   }
   return highPriority;
 }
+
+
 
 const priority1Only = function (arr) {
   const lowPriority = [];
